@@ -8,11 +8,13 @@ gameweek = 1
 all_stats = []
 for player_info in player_infos:
     id = player_info["id"]
+    name = player_info["first_name"] + " " + player_info["second_name"]
     link = f"https://fantasy.premierleague.com/api/element-summary/{id}/"
     try:
         print(id)
         stats_summary = requests.get(link).json()
         stats_2022 = stats_summary["history_past"][-1]
+        stats_22["name"]=name
         all_stats.append(stats_2022)
     except:
         pass
