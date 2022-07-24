@@ -33,6 +33,7 @@ def get_player_position(element_type):
             return position["singular_name_short"]
 
 
+my_teams = []
 home_teams = []
 away_teams = []
 kickoff_times = []
@@ -52,13 +53,15 @@ for player_info in player_infos:
     team_id = player_info["team"]
     cost = player_info["now_cost"]
     element_type = player_info["element_type"]
+    my_team = get_team_name(team_id)
     position = get_player_position(element_type)
-    print(id)
+    print(id, my_team, position, name, cost)
     home_team, away_team, kickoff_time, is_home = get_player_fixture_info(id, gameweek)
     ids.append(id)
     names.append(name)
     costs.append(cost)
     positions.append(position)
+    my_teams.append(my_team)
     home_teams.append(home_team)
     away_teams.append(away_team)
     kickoff_times.append(kickoff_time)
@@ -75,4 +78,5 @@ df["home_team"] = home_teams
 df["away_team"] = away_teams
 df["kickoff_time"] = kickoff_times
 df["is_home"] = is_homes
+df["team_x"] = my_teams
 df.to_csv("player_info.csv")
